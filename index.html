@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <title>Str combination</title>
+</head>
+
+<body>
+
+    <!-- /!\ no space between char -->
+    <input type="text" id="strToCombine" value="abc">
+
+    <p>Click the button to find all possible combinations</p>
+
+    <button id="findbutton">Find !</button>
+
+    <div style="max-width:100%;overflow-wrap: break-word;">
+        <p id="result"></p>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    
+    var button = document.getElementById("findbutton");
+
+    button.onclick = function() {
+        var str = document.getElementById('strToCombine').value;
+        console.log(str);
+        toCombine(str);
+    }
+
+    function toCombine(chars) {
+
+        //chars to array
+        var charsArray = chars.split('');
+
+        var result = [];
+
+        function recurse(pre, charsArray) {
+            //loop on charsArray lenght
+            for (var i = 0; i < charsArray.length; i++) {
+                //push each char and empty string in result array
+                result.push(pre + charsArray[i]);
+                //push following adjacent char
+                recurse(pre + charsArray[i], charsArray.slice(i + 1));
+            }
+        }
+
+        //call recursion
+        recurse('', charsArray);
+        document.getElementById('result').innerHTML = result;
+    }
+
+    
+</script>
+
+<!-- Laurie Seiller -->
